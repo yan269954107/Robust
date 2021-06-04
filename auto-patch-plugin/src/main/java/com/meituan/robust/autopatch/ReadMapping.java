@@ -66,6 +66,13 @@ public class ReadMapping {
                     line = reader.readLine();
                     while (line != null) {
                         line = line.trim();
+                        if (line.startsWith("#")) {
+                            line = reader.readLine();
+                            if (line == null) {
+                                break;
+                            }
+                            continue;
+                        }
                         if (line.endsWith(":")) {
                             needBacktrace = true;
                             break;
