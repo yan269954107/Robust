@@ -63,9 +63,10 @@ class PatchesFactory {
 
         dealWithSuperMethod(temPatchClass, modifiedClass, patchPath);
 
-        if (Config.supportProGuard && ReadMapping.getInstance().getClassMapping(modifiedClass.getName()) == null) {
-            throw new RuntimeException(" something wrong with mappingfile ,cannot find  class  " + modifiedClass.getName() + "   in mapping file");
-        }
+        //新版本Android sdk不再混淆activity内的方法名了，会导致修复的如果是activity的话，在mapping文件内根本就没有这个activity
+//        if (Config.supportProGuard && ReadMapping.getInstance().getClassMapping(modifiedClass.getName()) == null) {
+//            throw new RuntimeException(" something wrong with mappingfile ,cannot find  class  " + modifiedClass.getName() + "   in mapping file");
+//        }
         List<CtMethod> invokeSuperMethodList = Config.invokeSuperMethodMap.getOrDefault(modifiedClass.getName(), new ArrayList<>());
 
         createPublicMethodForPrivate(temPatchClass);
